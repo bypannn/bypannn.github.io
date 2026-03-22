@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pannn — Marketing & Creative</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #f5f3ef;
+      --fg: #111;
+      --muted: #888;
+      --accent: #c8b8ff;
+      --accent2: #ffb3c6;
+      --card: #fff;
+      --border: #e5e0d8;
+      --mono: 'DM Mono', monospace;
+      --sans: 'DM Sans', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--sans);
+      background: var(--bg);
+      color: var(--fg);
+      min-height: 100vh;
+      font-size: 16px;
+      line-height: 1.6;
+    }
+
+    /* noise texture overlay */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.5;
+    }
+
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.25rem 2.5rem;
+      backdrop-filter: blur(12px);
+      background: rgba(245, 243, 239, 0.85);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-family: var(--mono);
+      font-size: 0.9rem;
+      font-weight: 400;
+      letter-spacing: 0.05em;
+      color: var(--fg);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.85rem;
+      color: var(--muted);
+      text-decoration: none;
+      letter-spacing: 0.03em;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--fg); }
+
+    /* hero */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 8rem 2.5rem 4rem;
+      max-width: 960px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-tag {
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      color: var(--muted);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .hero-tag::before {
+      content: '';
+      display: inline-block;
+      width: 1.5rem;
+      height: 1px;
+      background: var(--muted);
+    }
+
+    h1 {
+      font-size: clamp(3rem, 8vw, 6rem);
+      font-weight: 300;
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+      margin-bottom: 1.5rem;
+    }
+
+    h1 em {
+      font-style: italic;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-sub {
+      font-size: 1.1rem;
+      color: var(--muted);
+      max-width: 480px;
+      font-weight: 300;
+      margin-bottom: 3rem;
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.7rem 1.5rem;
+      border-radius: 100px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      text-decoration: none;
+      transition: all 0.2s;
+      cursor: pointer;
+      border: none;
+      font-family: var(--sans);
+    }
+
+    .btn-primary {
+      background: var(--fg);
+      color: var(--bg);
+    }
+
+    .btn-primary:hover {
+      background: #333;
+      transform: translateY(-1px);
+    }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--fg);
+      border: 1px solid var(--border);
+    }
+
+    .btn-ghost:hover {
+      border-color: var(--fg);
+      transform: translateY(-1px);
+    }
+
+    /* sections */
+    section {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 6rem 2.5rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .section-label {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      color: var(--muted);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 3rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .section-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    /* about */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+
+    .about-text h2 {
+      font-size: 2rem;
+      font-weight: 300;
+      letter-spacing: -0.02em;
+      margin-bottom: 1.5rem;
+      line-height: 1.2;
+    }
+
+    .about-text p {
+      color: var(--muted);
+      font-size: 0.95rem;
+      line-height: 1.8;
+      margin-bottom: 1rem;
+    }
+
+    .skills-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 2rem;
+    }
+
+    .skill-tag {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      padding: 0.35rem 0.75rem;
+      border-radius: 100px;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      letter-spacing: 0.03em;
+    }
+
+    .about-stats {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .stat {
+      padding: 1.5rem;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+    }
+
+    .stat-num {
+      font-size: 2.5rem;
+      font-weight: 300;
+      letter-spacing: -0.03em;
+      line-height: 1;
+      margin-bottom: 0.25rem;
+    }
+
+    .stat-num span {
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .stat-label {
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    /* work */
+    .work-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+    }
+
+    .work-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 2rem;
+      transition: all 0.25s;
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+
+    .work-card:hover {
+      border-color: #ccc;
+      transform: translateY(-3px);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.06);
+    }
+
+    .work-card-tag {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      color: var(--muted);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+
+    .work-card h3 {
+      font-size: 1.15rem;
+      font-weight: 400;
+      letter-spacing: -0.01em;
+      margin-bottom: 0.75rem;
+    }
+
+    .work-card p {
+      font-size: 0.85rem;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .work-card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 1.5rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .work-card-meta {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      color: var(--muted);
+    }
+
+    .arrow {
+      font-size: 0.9rem;
+      color: var(--muted);
+      transition: transform 0.2s;
+    }
+
+    .work-card:hover .arrow { transform: translate(3px, -3px); }
+
+    /* blog */
+    .blog-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .blog-item {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      padding: 1.5rem 0;
+      border-bottom: 1px solid var(--border);
+      text-decoration: none;
+      color: inherit;
+      gap: 2rem;
+      transition: opacity 0.2s;
+    }
+
+    .blog-item:hover { opacity: 0.6; }
+
+    .blog-item:first-child { border-top: 1px solid var(--border); }
+
+    .blog-title {
+      font-size: 1rem;
+      font-weight: 400;
+      letter-spacing: -0.01em;
+    }
+
+    .blog-date {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+
+    /* contact */
+    .contact-inner {
+      background: var(--fg);
+      color: var(--bg);
+      border-radius: 20px;
+      padding: 4rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 3rem;
+    }
+
+    .contact-inner h2 {
+      font-size: 2.5rem;
+      font-weight: 300;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+    }
+
+    .contact-inner h2 em {
+      font-style: italic;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .contact-links {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      min-width: 200px;
+    }
+
+    .contact-link {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.85rem 1.25rem;
+      border-radius: 10px;
+      border: 1px solid rgba(255,255,255,0.12);
+      text-decoration: none;
+      color: rgba(255,255,255,0.8);
+      font-size: 0.85rem;
+      transition: all 0.2s;
+    }
+
+    .contact-link:hover {
+      border-color: rgba(255,255,255,0.3);
+      color: #fff;
+    }
+
+    /* footer */
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      color: var(--muted);
+      border-top: 1px solid var(--border);
+      position: relative;
+      z-index: 1;
+    }
+
+    /* responsive */
+    @media (max-width: 768px) {
+      nav { padding: 1rem 1.5rem; }
+      .hero { padding: 7rem 1.5rem 3rem; }
+      section { padding: 4rem 1.5rem; }
+      .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .work-grid { grid-template-columns: 1fr; }
+      .contact-inner { flex-direction: column; padding: 2.5rem; }
+      h1 { font-size: 3rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="#" class="nav-logo">pannn.studio</a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#work">Work</a></li>
+      <li><a href="#blog">Blog</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <div class="hero">
+    <p class="hero-tag">Marketing · Creative · Strategy</p>
+    <h1>Hi, I'm <em>Pannn</em>.<br>I make brands<br>worth noticing.</h1>
+    <p class="hero-sub">Marketing strategist and creative director specializing in brand campaigns, copywriting, new media, and performance advertising.</p>
+    <div class="hero-cta">
+      <a href="#work" class="btn btn-primary">View my work ↓</a>
+      <a href="#contact" class="btn btn-ghost">Get in touch</a>
+    </div>
+  </div>
+
+  <section id="about">
+    <p class="section-label">About</p>
+    <div class="about-grid">
+      <div class="about-text">
+        <h2>Strategy meets<br>creative instinct.</h2>
+        <p>I work at the intersection of brand strategy and creative execution — translating business goals into campaigns that actually move people.</p>
+        <p>My background spans 360° campaigns, social content, information flow advertising, and product marketing. I care about the idea behind the execution as much as the execution itself.</p>
+        <div class="skills-list">
+          <span class="skill-tag">Brand Strategy</span>
+          <span class="skill-tag">Copywriting</span>
+          <span class="skill-tag">New Media</span>
+          <span class="skill-tag">信息流广告</span>
+          <span class="skill-tag">Product Marketing</span>
+          <span class="skill-tag">Content Strategy</span>
+          <span class="skill-tag">Campaign Planning</span>
+          <span class="skill-tag">User Growth</span>
+        </div>
+      </div>
+      <div class="about-stats">
+        <div class="stat">
+          <div class="stat-num"><span>3+</span></div>
+          <div class="stat-label">Years in marketing & creative</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num"><span>20+</span></div>
+          <div class="stat-label">Campaigns executed</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num"><span>∞</span></div>
+          <div class="stat-label">Ideas worth pitching</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="work">
+    <p class="section-label">Selected Work</p>
+    <div class="work-grid">
+      <a href="#" class="work-card">
+        <p class="work-card-tag">Brand Campaign</p>
+        <h3>Project name goes here</h3>
+        <p>Brief description of what you did, the challenge, and the result. Keep it punchy — one or two sentences max.</p>
+        <div class="work-card-footer">
+          <span class="work-card-meta">2024 · Brand · Social</span>
+          <span class="arrow">↗</span>
+        </div>
+      </a>
+      <a href="#" class="work-card">
+        <p class="work-card-tag">信息流广告</p>
+        <h3>Project name goes here</h3>
+        <p>Brief description of what you did, the challenge, and the result. Keep it punchy — one or two sentences max.</p>
+        <div class="work-card-footer">
+          <span class="work-card-meta">2024 · Performance · ROI</span>
+          <span class="arrow">↗</span>
+        </div>
+      </a>
+      <a href="#" class="work-card">
+        <p class="work-card-tag">New Media</p>
+        <h3>Project name goes here</h3>
+        <p>Brief description of what you did, the challenge, and the result. Keep it punchy — one or two sentences max.</p>
+        <div class="work-card-footer">
+          <span class="work-card-meta">2023 · Social · Growth</span>
+          <span class="arrow">↗</span>
+        </div>
+      </a>
+      <a href="#" class="work-card">
+        <p class="work-card-tag">Copywriting</p>
+        <h3>Project name goes here</h3>
+        <p>Brief description of what you did, the challenge, and the result. Keep it punchy — one or two sentences max.</p>
+        <div class="work-card-footer">
+          <span class="work-card-meta">2023 · Copy · Brand Voice</span>
+          <span class="arrow">↗</span>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <section id="blog">
+    <p class="section-label">Writing</p>
+    <div class="blog-list">
+      <a href="#" class="blog-item">
+        <span class="blog-title">Your first article title goes here</span>
+        <span class="blog-date">2024.03</span>
+      </a>
+      <a href="#" class="blog-item">
+        <span class="blog-title">Thoughts on brand voice in the age of AI</span>
+        <span class="blog-date">2024.02</span>
+      </a>
+      <a href="#" class="blog-item">
+        <span class="blog-title">What makes a campaign actually work</span>
+        <span class="blog-date">2024.01</span>
+      </a>
+      <a href="#" class="blog-item">
+        <span class="blog-title">Notes on writing for social media</span>
+        <span class="blog-date">2023.12</span>
+      </a>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="contact-inner">
+      <h2>Let's make<br>something <em>good.</em></h2>
+      <div class="contact-links">
+        <a href="mailto:your@email.com" class="contact-link">
+          <span>Email</span>
+          <span>↗</span>
+        </a>
+        <a href="#" class="contact-link">
+          <span>WeChat</span>
+          <span>↗</span>
+        </a>
+        <a href="#" class="contact-link">
+          <span>LinkedIn</span>
+          <span>↗</span>
+        </a>
+        <a href="#" class="contact-link">
+          <span>小红书</span>
+          <span>↗</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    © 2024 Pannn · Built with care
+  </footer>
+
+</body>
+</html>
