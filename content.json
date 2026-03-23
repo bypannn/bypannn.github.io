@@ -1,0 +1,67 @@
+{
+  "name": "Pannn",
+  "title": "Marketing & Creative",
+  "bio": "Marketing strategist and creative director specializing in brand campaigns, copywriting, new media, and performance advertising.",
+  "skills": ["Brand Strategy", "Copywriting", "New Media", "信息流广告", "Product Marketing", "Content Strategy", "Campaign Planning", "User Growth"],
+  "stats": [
+    { "num": "3+", "label": "Years in marketing & creative" },
+    { "num": "20+", "label": "Campaigns executed" },
+    { "num": "∞", "label": "Ideas worth pitching" }
+  ],
+  "contact": {
+    "email": "your@email.com",
+    "wechat": "yourwechat",
+    "linkedin": "",
+    "xiaohongshu": ""
+  },
+  "works": [
+    {
+      "id": "project-1",
+      "tag": "Brand Campaign",
+      "title": "Project name goes here",
+      "desc": "Brief description of what you did, the challenge, and the result.",
+      "meta": "2024 · Brand · Social"
+    },
+    {
+      "id": "project-2",
+      "tag": "信息流广告",
+      "title": "Project name goes here",
+      "desc": "Brief description of what you did, the challenge, and the result.",
+      "meta": "2024 · Performance · ROI"
+    },
+    {
+      "id": "project-3",
+      "tag": "New Media",
+      "title": "Project name goes here",
+      "desc": "Brief description of what you did, the challenge, and the result.",
+      "meta": "2023 · Social · Growth"
+    },
+    {
+      "id": "project-4",
+      "tag": "Copywriting",
+      "title": "Project name goes here",
+      "desc": "Brief description of what you did, the challenge, and the result.",
+      "meta": "2023 · Copy · Brand Voice"
+    }
+  ],
+  "posts": [
+    {
+      "id": "post-1",
+      "title": "Your first article title goes here",
+      "date": "2024.03",
+      "excerpt": "A short preview of what this article is about."
+    },
+    {
+      "id": "post-2",
+      "title": "Thoughts on brand voice in the age of AI",
+      "date": "2024.02",
+      "excerpt": "A short preview of what this article is about."
+    },
+    {
+      "id": "post-3",
+      "title": "What makes a campaign actually work",
+      "date": "2024.01",
+      "excerpt": "A short preview of what this article is about."
+    }
+  ]
+}

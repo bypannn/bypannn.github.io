@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Blog — Pannn</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <nav>
+    <a href="/" class="nav-logo">pannn.studio</a>
+    <ul class="nav-links">
+      <li><a href="/#about">About</a></li>
+      <li><a href="work.html">Work</a></li>
+      <li><a href="blog.html" style="color:var(--fg)">Blog</a></li>
+      <li><a href="/#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <section style="padding-top:8rem">
+    <p class="section-label">All Writing</p>
+    <div class="blog-list" id="blog-list"></div>
+  </section>
+
+  <footer><span id="footer-name"></span> · Built with care</footer>
+
+  <script>
+    fetch('content.json')
+      .then(r => r.json())
+      .then(data => {
+        document.getElementById('footer-name').textContent = '© 2024 ' + data.name;
+        const blogList = document.getElementById('blog-list');
+        data.posts.forEach(p => {
+          blogList.innerHTML += `
+            <a href="blog/${p.id}.html" class="blog-item">
+              <span class="blog-title">${p.title}</span>
+              <span class="blog-date">${p.date}</span>
+            </a>`;
+        });
+      });
+  </script>
+</body>
+</html>

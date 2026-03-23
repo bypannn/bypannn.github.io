@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Post — Pannn</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+<body>
+  <nav>
+    <a href="/" class="nav-logo">pannn.studio</a>
+    <ul class="nav-links">
+      <li><a href="/#about">About</a></li>
+      <li><a href="/work.html">Work</a></li>
+      <li><a href="/blog.html" style="color:var(--fg)">Blog</a></li>
+      <li><a href="/#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <div class="article-header">
+    <a href="/blog.html" class="back-link">← All posts</a>
+    <p class="article-tag" id="article-tag"></p>
+    <h1 id="article-title">Loading...</h1>
+    <p class="article-date" id="article-date"></p>
+  </div>
+
+  <div class="article-body" id="article-body"></div>
+
+  <footer>© 2024 Pannn · Built with care</footer>
+
+  <script>
+    const slug = location.pathname.split('/').pop().replace('.html','');
+    fetch(slug + '.md')
+      .then(r => r.text())
+      .then(text => {
+        const frontmatter = text.match(/^---\n([\s\S]*?)\n---/);
+        let title = '', date = '', body = text;
+        if (frontmatter) {
+          const fm = frontmatter[1];
+          title = (fm.match(/title:\s*"(.+)"/) || [])[1] || '';
+          date = (fm.match(/date:\s*"(.+)"/) || [])[1] || '';
+          body = text.replace(/^---\n[\s\S]*?\n---\n/, '');
+        }
+        document.title = title + ' — Pannn';
+        document.getElementById('article-title').textContent = title;
+        document.getElementById('article-date').textContent = date;
+        document.getElementById('article-body').innerHTML = marked.parse(body);
+      });
+  </script>
+</body>
+</html>
